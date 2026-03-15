@@ -49,34 +49,75 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Typewriter effect for Hero Title
-    const typewriterElement = document.getElementById('typewriter-title');
-    const text = "SPECTRUM";
-    let index = 0;
-    let isDeleting = false;
-    let speed = 200;
+    // Pro Typewriter effect for Triple Main Titles
+    const t1 = document.getElementById('typewriter-title-1');
+    const t2 = document.getElementById('typewriter-title-2');
+    const t3 = document.getElementById('typewriter-title-3');
+    
+    const text1 = "SPECTRUM";
+    const text2 = "Siyasal Bilimler";
+    const text3 = "Sempozyumu";
+    
+    let idx1 = 0, idx2 = 0, idx3 = 0;
+    let deleting = false;
+    let waitTime = 150;
 
-    function type() {
-        if (!typewriterElement) return;
+    function runTypewriter() {
+        if (!t1 || !t2 || !t3) return;
 
-        const currentText = text.substring(0, index);
-        typewriterElement.innerHTML = currentText;
-
-        if (!isDeleting && index < text.length) {
-            index++;
-            speed = 200;
-        } else if (isDeleting && index > 0) {
-            index--;
-            speed = 100;
+        if (!deleting) {
+            // Forward Typing
+            if (idx1 < text1.length) {
+                t1.classList.add('typing');
+                t1.innerHTML = text1.substring(0, idx1 + 1);
+                idx1++;
+                waitTime = 100 + Math.random() * 100;
+            } else if (idx2 < text2.length) {
+                t1.classList.remove('typing');
+                t2.classList.add('typing');
+                t2.innerHTML = text2.substring(0, idx2 + 1);
+                idx2++;
+                waitTime = 80 + Math.random() * 80;
+            } else if (idx3 < text3.length) {
+                t2.classList.remove('typing');
+                t3.classList.add('typing');
+                t3.innerHTML = text3.substring(0, idx3 + 1);
+                idx3++;
+                waitTime = 80 + Math.random() * 80;
+            } else {
+                // Done: Hold
+                deleting = true;
+                waitTime = 5000; 
+            }
         } else {
-            isDeleting = !isDeleting;
-            speed = 1000; // Pause at end
+            // Reverse Deleting
+            if (idx3 > 0) {
+                t3.classList.add('typing');
+                t3.innerHTML = text3.substring(0, idx3 - 1);
+                idx3--;
+                waitTime = 30;
+            } else if (idx2 > 0) {
+                t3.classList.remove('typing');
+                t2.classList.add('typing');
+                t2.innerHTML = text2.substring(0, idx2 - 1);
+                idx2--;
+                waitTime = 30;
+            } else if (idx1 > 0) {
+                t2.classList.remove('typing');
+                t1.classList.add('typing');
+                t1.innerHTML = text1.substring(0, idx1 - 1);
+                idx1--;
+                waitTime = 30;
+            } else {
+                deleting = false;
+                waitTime = 1000;
+            }
         }
 
-        setTimeout(type, speed);
+        setTimeout(runTypewriter, waitTime);
     }
 
-    type();
+    runTypewriter();
 
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('mobile-menu');
