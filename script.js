@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const t2 = document.getElementById('typewriter-title-2');
     const t3 = document.getElementById('typewriter-title-3');
     
-    const text1 = "SPECTRUM";
+    const text1 = "SPEKTRUM";
     const text2 = "Siyasal Bilimler";
     const text3 = "Sempozyumu";
     
