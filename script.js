@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const t3 = document.getElementById('typewriter-title-3');
     
     const text1 = "SPEKTRUM";
-    const text2 = "Siyasal Bilimler";
+    const text2 = "Siyasal Bilgiler";
     const text3 = "Sempozyumu";
     
     let idx1 = 0, idx2 = 0, idx3 = 0;
